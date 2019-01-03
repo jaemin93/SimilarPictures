@@ -15,7 +15,8 @@ STEP 1
 ```
 Convert data (tfrecord)
 이미지 데이터 tfrecord 포맷으로 바꾸기
-기존에 받은 네이버 데이터셋을 utils안에 subdir_label.py를 실행하여 label로 서브 폴더를 만들어 나누어 줍니다. 다음 slim에 본래 있던 download_and_convert_data.py와, datasets디렉토리 안에 naver.py, download_and_convert_naver.py를 추가해주고 dataset_factory.py 를 수정하였습니다. 
+기존에 받은 네이버 데이터셋을 utils안에 subdir_label.py를 실행하여 label로 서브 폴더를 만들어 나누어 줍니다. 
+다음 slim에 본래 있던 download_and_convert_data.py와, datasets디렉토리 안에 naver.py, download_and_convert_naver.py를 추가해주고 dataset_factory.py 를 수정하였습니다. 
 다음 [1]:python download_and_convert_data.py --dataset_name=[데이터셋이름] --dataset_dir=[데이터셋경로] 
 를 실행하여 자동으로 validation 과 train을 나누어서 tfrecord로 변환하였습니다. 저희가 올린 프로젝트에서는 
 [1]을 실행해주시면 됩니다. 예시는 다음과 같습니다. 
@@ -26,7 +27,8 @@ STEP 2
 ```
 Train
 https://github.com/tensorflow/models 을 clone 합니다.
-data를 directory의 path에 맞춰 넣어 놓으십시오.해당 명령어는 저희의 directory path에 맞춰넣은 것이므로 path는 사용자의 path에 맞게 수정하여 주십시오.
+data를 directory의 path에 맞춰 넣어 놓으십시오.
+해당 명령어는 저희의 directory path에 맞춰넣은 것이므로 path는 사용자의 path에 맞게 수정하여 주십시오.
 
 python train_image_classifier.py 
     --train_dir=/tfpath/naver/log_inception_resnet_v2_naver 
