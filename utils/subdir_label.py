@@ -1,6 +1,9 @@
 '''
-naver에서 받은 데이터셋 폴더안에 이미지들을 모델별로 분류하여 모델이름이 곧
-label이 되어서 sub directory가 되고 분류된 데이터셋을 만듭니다. 
+naver에서 받은 데이터셋과 augmentation한 데이터 폴더안에 이미지들을 
+모델별로 분류하여 모델이름이 곧 label이 되어서 sub directory가 되고 
+분류된 데이터셋을 만듭니다. 
+
+분류된 폴더 트리구조는 상위 디렉토리에서 data_folder_view.txt에서 확인가능 합니다.
 '''
 import os
 import cv2
@@ -22,6 +25,8 @@ for sub_idx, dir_list in enumerate(os.listdir(AUG_IMG_DIR)):
         product_id = img_info[2]
         aug_info = img_info[0]
         img_id = img_info[3][:img_info[3].find('.')]
+
+        #Trans Augmentation이 L, R로 나누어져있어서 두가지로 나눈다.
         if eq(aug_info, 'T') and sub_idx == 3:
             aug_info = 'L'
         elif eq(aug_info, 'T') and sub_idx == 4:
