@@ -65,8 +65,10 @@ with tf.Graph().as_default():
 
 label_list.sort()
 
-with open('labels_pred.txt', 'a') as f:
-    for label, img in label_list:
-        f.write(str(label)+'\n')
-        cpy_img = cv2.imread(test_img_path+os.sep+img)
-        cv2.imwrite(PRED_IMG_RESULT+ os.sep+img, cpy_img)
+with open('labels_pred.txt', 'a') as fl:
+    with open('img_paths.txt', 'a') as f:
+        for label, img in label_list:
+            f1.write(str(label)+'\n')
+            f.write(str(img)+'\n')
+            cpy_img = cv2.imread(test_img_path+os.sep+img)
+            cv2.imwrite(PRED_IMG_RESULT+ os.sep+img, cpy_img)
