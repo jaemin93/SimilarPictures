@@ -13,6 +13,7 @@ trained ckpt link: [Ckpt based on naver_dataset](https://1drv.ms/u/s!AtpHpqkl2-8
 ### STEP 1: Convert data (tfrecord)
 
 이미지 데이터 tfrecord 포맷으로 바꾸기
+데이터셋 구성은 [data_foler_view.txt](https://github.com/jaemin93/SimilarPictures/blob/master/data_folder_view.txt) 에서 볼 수 있습니다.
 기존에 받은 네이버 데이터셋을 utils안에 subdir_label.py를 실행하여 label로 서브 폴더를 만들어 나누어 줍니다. 
 다음 slim에 본래 있던 download_and_convert_data.py와, datasets디렉토리 안에 naver.py, download_and_convert_naver.py를 추가해주고 dataset_factory.py 를 수정하였습니다. 다음 코드를 실행
 
