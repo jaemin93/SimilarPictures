@@ -64,3 +64,7 @@ for file_name in image_file_list:
     Translation(img, file_name)
 
     count+=1
+<<<<<<< HEAD
+=======
+
+>>>>>>> b7cebb4186c1e43f121d10ba8cf5dbf2036bf585
