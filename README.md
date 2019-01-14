@@ -10,6 +10,19 @@ tf-slim
 trained ckpt link: [inception_resnet_v2.ckpt based on naver_dataset](https://1drv.ms/u/s!AtpHpqkl2-8C1wvs5ne0aRNFaA2O)
 
 ## GOAL
+
+### STEP 0: Data Augmentation
+
+naver에서 받은 data로 train을 하기에는 데이터 양이 부족하다고 생각되었습니다. 따라서 Augmentation을 활용하여
+데이터셋을 늘리고 다양한 환경에서도 분류가 될수 있도록 하였습니다.
+
+Augmentation:
+    - Affine            :SimilarPictures/uitls/Affine.py
+    - Blur              :SimilarPictures/uitls/Blur.py
+    - Flip              :SimilarPictures/uitls/Flip.py
+    - Translate left    :SimilarPictures/uitls/Translation.py
+    - Translate right   :SimilarPictures/uitls/Translation.py
+
 ### STEP 1: Convert data (tfrecord)
 
 이미지 데이터 tfrecord 포맷으로 바꾸기
