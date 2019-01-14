@@ -1,5 +1,5 @@
 # SimilarPictures
-이미지 유사도 측정하여 군집화 하기
+Inception Resnet V2를 사용하여 이미지 유사도 측정하여 군집화 하기
 
 ## Requirements
 Python 3.5
@@ -7,7 +7,7 @@ Python 3.5
 tf-slim
 ```
 
-trained ckpt link: [Ckpt based on naver_dataset](https://1drv.ms/u/s!AtpHpqkl2-8C1wvs5ne0aRNFaA2O)
+trained ckpt link: [inception_resnet_v2.ckpt based on naver_dataset](https://1drv.ms/u/s!AtpHpqkl2-8C1wvs5ne0aRNFaA2O)
 
 ## GOAL
 ### STEP 1: Convert data (tfrecord)
