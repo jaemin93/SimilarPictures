@@ -17,11 +17,12 @@ naver에서 받은 data로 train을 하기에는 데이터 양이 부족하다�
 데이터셋을 늘리고 다양한 환경에서도 분류가 될수 있도록 하였습니다.
 
 Augmentation:
-    - Affine            :SimilarPictures/uitls/Affine.py
-    - Blur              :SimilarPictures/uitls/Blur.py
-    - Flip              :SimilarPictures/uitls/Flip.py
-    - Translate left    :SimilarPictures/uitls/Translation.py
-    - Translate right   :SimilarPictures/uitls/Translation.py
+
+    1. Affine            :SimilarPictures/uitls/Affine.py
+    2. Blur              :SimilarPictures/uitls/Blur.py
+    3. Flip              :SimilarPictures/uitls/Flip.py
+    4. Translate left    :SimilarPictures/uitls/Translation.py
+    5. Translate right   :SimilarPictures/uitls/Translation.py
 
 ### STEP 1: Convert data (tfrecord)
 
