@@ -11,12 +11,12 @@ from operator import eq
 
 def make_label_dict(path, d):
     total_path = os.listdir(path)
-    for idx, label in enumerate(total_path):
-        label_dir = os.listdir(path + os.sep + label)
+    for idx, sub_label in enumerate(total_path):
+        label_dir = os.listdir(path + os.sep + sub_label)
         label = 'none'
         for img_name in label_dir:
             label = img_name.split('_')[0]
-        d[label] = str(idx+1)
+        d[label] = sub_label
 
 
 # 트레이닝 데이터셋
@@ -44,9 +44,10 @@ for sub_idx, dir_list in enumerate(os.listdir(AUG_IMG_DIR)):
         elif eq(aug_info, 'T') and sub_idx == 4:
             aug_info = 'R'
         file_name = model_id + '_' + product_id + '_' + img_id + '_' + aug_info + '.jpg'
-        print(d[model_id], img_name)
-        # img = cv2.imread(sub_dir_list + os.sep + img_name)
+        img = cv2.imread(sub_dir_list + os.sep + img_name)
         # print('C:\\Users\\iceba\\develop\\data\\naver\\naver_photos'+ os.sep + \
         #             model_id + os.sep + file_name)
-        # cv2.imwrite('C:\\Users\\iceba\\develop\\data\\naver\\naver_photos'+ os.sep + \
-        #             model_id + os.sep + file_name, img)
+        print('C:\\Users\\iceba\\develop\\data\\dummy\\img\\naver_photos\\total'+ os.sep + \
+                    d[model_id] + os.sep + file_name)
+        cv2.imwrite('C:\\Users\\iceba\\develop\\data\\dummy\\img\\naver_photos\\total'+ os.sep + \
+                    d[model_id] + os.sep + file_name, img)
