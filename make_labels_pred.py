@@ -19,7 +19,7 @@ with tf.Graph().as_default():
 
     user_images = [] # 복수의 원본 이미지
     user_processed_images = [] # 복수의 전처리된 이미지
-    test_img_path = "C:\\Users\\iceba\\develop\\data\\naver_result\\vali"
+    test_img_path = "C:\\Users\\iceba\\develop\\data\\test"
     image_files = os.listdir(test_img_path) # 분류하고 싶은 이미지가 저장된 폴더
 
     for i in image_files:
@@ -39,7 +39,6 @@ with tf.Graph().as_default():
     init_fn = slim.assign_from_checkpoint_fn(
         os.path.join(checkpoints_dir, 'model.ckpt-19248'),
         slim.get_model_variables('InceptionResnetV2'))
-        #InceptionV1
 
     with tf.Session() as sess:
         init_fn(sess)
@@ -51,10 +50,6 @@ with tf.Graph().as_default():
     for idx, files in enumerate(image_files):
         probabilitie = probabilities[idx, 0:]
         sorted_inds = [i[0] for i in sorted(enumerate(-probabilitie), key=lambda x:x[1])]
-        # plt.figure()
-        # plt.imshow(np_images[files].astype(np.uint8))
-        # plt.axis('off')
-        # plt.show()
         
         for p in range(5):
             index = sorted_inds[p]

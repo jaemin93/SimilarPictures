@@ -3,7 +3,7 @@ import cv2
 import random
 
 test_img_path = "C:\\Users\\iceba\\develop\\data\\naver_train"
-val = 'C:\\Users\\iceba\\develop\\data\\naver_result\\vali'
+val = 'C:\\Users\\iceba\\develop\\data\\test'
 
 test_idx = random.sample(range(0, 10617), 200)
 l = list()

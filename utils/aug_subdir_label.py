@@ -9,11 +9,23 @@ import os
 import cv2
 from operator import eq
 
+def make_label_dict(path, d):
+    total_path = os.listdir(path)
+    for idx, label in enumerate(total_path):
+        label_dir = os.listdir(path + os.sep + label)
+        label = 'none'
+        for img_name in label_dir:
+            label = img_name.split('_')[0]
+        d[label] = str(idx+1)
+
+
 # 트레이닝 데이터셋
-AUG_IMG_DIR = 'C:\\Users\\iceba\\develop\\data\\naver\\D2_CAMPUS_FEST_train'
-IMG_DIR = 'C:\\Users\\iceba\\develop\\data\\naver\\naver_photos'
+AUG_IMG_DIR = 'C:\\Users\\iceba\\develop\\data\\dummy\\img\\naver_photos\\augmentation'
+TOTAL_IMG_DIR = 'C:\\Users\\iceba\\develop\\data\\dummy\\img\\naver_photos\\total'
 count = 0
 idx = 1
+d = dict()
+make_label_dict(TOTAL_IMG_DIR, d)
 
 # tfrecord 형태로 바꾸기위한 디렉토리 변환
 for sub_idx, dir_list in enumerate(os.listdir(AUG_IMG_DIR)):
@@ -32,9 +44,9 @@ for sub_idx, dir_list in enumerate(os.listdir(AUG_IMG_DIR)):
         elif eq(aug_info, 'T') and sub_idx == 4:
             aug_info = 'R'
         file_name = model_id + '_' + product_id + '_' + img_id + '_' + aug_info + '.jpg'
-
-        img = cv2.imread(sub_dir_list + os.sep + img_name)
-        print('C:\\Users\\iceba\\develop\\data\\naver\\naver_photos'+ os.sep + \
-                    model_id + os.sep + file_name)
-        cv2.imwrite('C:\\Users\\iceba\\develop\\data\\naver\\naver_photos'+ os.sep + \
-                    model_id + os.sep + file_name, img)
+        print(d[model_id], img_name)
+        # img = cv2.imread(sub_dir_list + os.sep + img_name)
+        # print('C:\\Users\\iceba\\develop\\data\\naver\\naver_photos'+ os.sep + \
+        #             model_id + os.sep + file_name)
+        # cv2.imwrite('C:\\Users\\iceba\\develop\\data\\naver\\naver_photos'+ os.sep + \
+        #             model_id + os.sep + file_name, img)
