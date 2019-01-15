@@ -50,20 +50,24 @@ def Gray (input, file_name):
     img = cv2.cvtColor(input, cv2.COLOR_BGR2GRAY)
     cv2.imwrite('C:/Users/Kim hyung il/Desktop/naver/D2_CAMPUS_FEST_train/Gray/' + 'G_' + file_name, img)
 
-count = 0
-#이미지 파일들이 있는 경로
-IMAGE_DIR_BASE = 'C:/Users/Kim hyung il/Desktop/naver/D2_CAMPUS_FEST_train/train'
-image_file_list = os.listdir(IMAGE_DIR_BASE)
-for file_name in image_file_list:
-    print(count)
-    img = cv2.imread(IMAGE_DIR_BASE + '/' + file_name)
-    rows, cols, ch = img.shape
-    Affine(img, file_name)
-    Blur(img, file_name)
-    Flip(img, file_name)
-    Translation(img, file_name)
+def _main():
+    count = 0
+    #이미지 파일들이 있는 경로
+    IMAGE_DIR_BASE = 'C:/Users/Kim hyung il/Desktop/naver/D2_CAMPUS_FEST_train/train'
+    image_file_list = os.listdir(IMAGE_DIR_BASE)
+    for file_name in image_file_list:
+        print(count)
+        img = cv2.imread(IMAGE_DIR_BASE + '/' + file_name)
+        rows, cols, ch = img.shape
+        Affine(img, file_name)
+        Blur(img, file_name)
+        Flip(img, file_name)
+        Translation(img, file_name)
 
-    count+=1
+        count+=1
+
+if if __name__ == "__main__":
+    _main()
 <<<<<<< HEAD
 =======
 

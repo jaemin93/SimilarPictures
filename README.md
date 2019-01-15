@@ -82,4 +82,5 @@ make_labels_pred.py에 path를 적절하게 바꾸어서 *.ckpt를 적용하고 
 python make_labels_pred.py
 ```
 
-실행을 하면 군집화된 label_pred.txt와 image_paths.txt를 얻을수 있습니다.
+실행을 하면 original 데이터에서 사용자가 원하는 갯수만큼 랜덤으로 뽑아서 test 데이터를 설정한 경로에 구성합니다.
+다음 test data들을 차례대로 Top-5 출력하고 label_true.txt, label_pred.txt, img_paths.txt를 만듭니다.

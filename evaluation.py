@@ -3,7 +3,6 @@ import numpy as np
 from sklearn import metrics
 from config import *
 
-
 def evaluation(labels_true_path, labels_pred_path):
     """
     정답 레이블과 예측 레이블 파일을 읽어서 Adjusted Rand index를 계산하여 반환하는 함수입니다.
@@ -56,8 +55,8 @@ if __name__ == '__main__':
     labels_pred1 = "labels_pred1.txt"
     labels_pred2 = "labels_pred2.txt"
 
-    score1 = evaluation(os.path.join(DATA_DIR, LABELS_TRUE + ".txt"), os.path.join(DATA_DIR, labels_pred1))
-    score2 = evaluation(os.path.join(DATA_DIR, LABELS_TRUE + ".txt"), os.path.join(DATA_DIR, labels_pred2))
+    score1 = evaluation(os.path.join('labels_true.txt'), os.path.join(labels_pred1))
+    score2 = evaluation(os.path.join('labels_true.txt'), os.path.join(labels_pred2))
 
     print("Score for %s: %s" % (labels_pred1, score1))
     print("Score for %s: %s" % (labels_pred2, score2))

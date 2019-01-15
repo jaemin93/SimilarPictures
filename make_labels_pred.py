@@ -6,9 +6,12 @@ import tensorflow as tf
 import cv2
 from nets import inception
 from preprocessing import inception_preprocessing
+from utils import make_test_data, aug_subdir_label
 
-checkpoints_dir = 'C:\\Users\\iceba\\develop\\tmp\\naver_ckpt\\train_log_inception_resnet_v2_naver'
-PRED_IMG_RESULT = 'C:\\Users\\iceba\\develop\\data\\naver_result\\images'
+CHECKPOINT_DIR = 'C:\\Users\\iceba\\develop\\data\\dummy\\pretrained_models\\train_log_inception_resnet_v2_naver'
+PRED_IMG_RESULT = 'C:\\Users\\iceba\\develop\\data\\dummy\\result\\images'
+TOTAL_IMAGE_DIR = 'C:\\Users\\iceba\\develop\\data\\dummy\\img\\naver_photos\\total'
+ORIGINAL_IMAGE_DIR = 'C:\\Users\\iceba\\develop\\data\\dummy\\img\\naver_photos\\original'
 slim = tf.contrib.slim
 
 image_size = inception.inception_resnet_v2.default_image_size    
@@ -19,7 +22,8 @@ with tf.Graph().as_default():
 
     user_images = [] # 복수의 원본 이미지
     user_processed_images = [] # 복수의 전처리된 이미지
-    test_img_path = "C:\\Users\\iceba\\develop\\data\\test"
+    test_img_path = "C:\\Users\\iceba\\develop\\data\\dummy\\test"
+    if make_test_data.test_dataset(ORIGINAL_IMAGE_DIR, test_img_path): print('make test dataset success')
     image_files = os.listdir(test_img_path) # 분류하고 싶은 이미지가 저장된 폴더
 
     for i in image_files:
@@ -37,14 +41,14 @@ with tf.Graph().as_default():
 
 
     init_fn = slim.assign_from_checkpoint_fn(
-        os.path.join(checkpoints_dir, 'model.ckpt-19248'),
+        os.path.join(CHECKPOINT_DIR, 'model.ckpt-19248'),
         slim.get_model_variables('InceptionResnetV2'))
 
     with tf.Session() as sess:
         init_fn(sess)
         np_images, probabilities = sess.run([user_images, probabilities])
     
-    names = os.listdir("C:\\Users\\iceba\\develop\\data\\naver\\naver_photos")
+    names = os.listdir("C:\\Users\\iceba\\develop\\data\\dummy\\img\\naver_photos\\total")
     
 
     for idx, files in enumerate(image_files):
@@ -59,11 +63,15 @@ with tf.Graph().as_default():
         print()
 
 label_list.sort()
-
-with open('labels_pred.txt', 'a') as fl:
-    with open('img_paths.txt', 'a') as f:
-        for label, img in label_list:
-            f1.write(str(label)+'\n')
-            f.write(str(img)+'\n')
-            cpy_img = cv2.imread(test_img_path+os.sep+img)
-            cv2.imwrite(PRED_IMG_RESULT+ os.sep+img, cpy_img)
+map_label = dict()
+aug_subdir_label.make_label_dict(TOTAL_IMAGE_DIR, map_label)
+with open('labels_true.txt', 'a') as f1:
+    with open('labels_pred2.txt', 'a') as f2:
+        with open('img_paths.txt', 'a') as f3:
+            for label, img in label_list:
+                img_model = img.split('_')[0]
+                f1.write(map_label[str(img_model)]+'\n')
+                f2.write(str(label)+'\n')
+                f3.write(str(img)+'\n')
+                cpy_img = cv2.imread(test_img_path+os.sep+img)
+                cv2.imwrite(PRED_IMG_RESULT+ os.sep+img, cpy_img)
