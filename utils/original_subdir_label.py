@@ -12,9 +12,9 @@ label -- images . . .
 import os
 import cv2
 
-def main():
+def _main():
     ORIGINAL_IMAGE = 'C:\\Users\\iceba\\develop\\data\\dummy\\img\\naver_photos\\original'
-    DIVIDE_IMAGE = 'C:\\Users\\iceba\\develop\\data\\dummy\\img\\naver_photos\\total'
+    DIVIDE_IMAGE = 'C:\\Users\\iceba\\develop\\data\\dummy\\img\\naver_photos\\total2'
 
     label_check_list = list()
     idx = 1
@@ -31,5 +31,5 @@ def main():
         copy_image = cv2.imread(original_image)
         cv2.imwrite(DIVIDE_IMAGE+os.sep+str(idx-1)+os.sep+img, copy_image)
 
-if if __name__ == "__main__":
+if __name__ == "__main__":
     _main()
