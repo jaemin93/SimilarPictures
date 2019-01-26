@@ -10,4 +10,7 @@ def test_dataset(path, test_path):
         cv2.imwrite(test_path + os.sep + img, cpy_img)
     return True
 
-# test_dataset('C:\\Users\\iceba\\develop\\data\\dummy\\img\\naver_photos\\original', 'C:\\Users\\iceba\\develop\\data\\dummy\\test')
+
+if __name__ == "__main__":
+    test_dataset('C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\img\\dummy', 'C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\img\\test')
+
