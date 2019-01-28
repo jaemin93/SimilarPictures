@@ -1,5 +1,5 @@
 """
-MobileNet V2 클래스 입니다. Tensorflow Hub에서 다운받은 Pre-train 모델을 사용합니다.
+NasNet 클래스 입니다. Tensorflow Hub에서 다운받은 Pre-train 모델을 사용합니다.
 """
 import tensorflow as tf
 import tensorflow_hub as hub
@@ -10,16 +10,16 @@ def get_encoded_image(image_path):
     return encoded_image
 
 
-class MobileNet2:
+class NasNet:
     def __init__(self):
-        self.module_url = "https://tfhub.dev/google/imagenet/mobilenet_v2_140_224/feature_vector/2"
+        self.module_url = "https://tfhub.dev/google/imagenet/nasnet_mobile/feature_vector/1"
         self.filename = tf.placeholder(tf.string, shape=[None], name='filename')
         self.encoded_images = tf.placeholder(tf.string, shape=[None], name='encoded_images')
         self.features = self.build_model()
-        self.output_size = 1792
+        self.output_size = 1056
 
     def build_model(self):
-        # build mobilenet v2 model using tensorflow hub
+        # build nasnet mobile model using tensorflow hub
         image_module = hub.Module(self.module_url)
         image_size = hub.get_expected_image_size(image_module)
 

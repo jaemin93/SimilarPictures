@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-MobileNet V2 클래스 입니다. Tensorflow Hub에서 다운받은 Pre-train 모델을 사용합니다.
+inception_resnet_v2 클래스 입니다. Tensorflow Hub에서 다운받은 Pre-train 모델을 사용합니다.
 """
 import tensorflow as tf
 import tensorflow_hub as hub
@@ -11,7 +11,7 @@ def get_encoded_image(image_path):
     return encoded_image
 
 
-class Inception_resnet_v2:
+class Inception_resnet_V2:
     def __init__(self):
         self.module_url = "https://tfhub.dev/google/imagenet/inception_resnet_v2/feature_vector/1"
         self.filename = tf.placeholder(tf.string, shape=[None], name='filename')
@@ -20,9 +20,8 @@ class Inception_resnet_v2:
         self.output_size = 1536
 
     def build_model(self):
-        # build mobilenet v2 model using tensorflow hub
-        # image_module = hub.Module(self.module_url)
-        image_module = '/home/edu/haejoo/python/naver/6th/image-cluster/ckpt/inception_resnet_v2.pb'
+        # build inception resnet v2 model using tensorflow hub
+        image_module = hub.Module(self.module_url)
         image_size = hub.get_expected_image_size(image_module)
 
         def _decode_and_resize_image(encoded: tf.Tensor) -> tf.Tensor:

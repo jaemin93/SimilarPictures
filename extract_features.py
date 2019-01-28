@@ -5,7 +5,8 @@ import os
 import time
 import numpy as np
 import tensorflow as tf
-from mobilenet_v2 import MobileNet2, get_encoded_image
+from models.mobilenet_v2_140_224 import MobileNet2, get_encoded_image
+from models.inception_resnet_v2 import Inception_resnet_v2, get_encoded_image
 from config import *
 
 
@@ -32,7 +33,7 @@ def extract_features():
     next_batch = iterator.get_next()
 
     # build dnn model
-    model = MobileNet2()
+    model = Inception_resnet_v2()
     sess = tf.Session()
     sess.run(tf.global_variables_initializer())
 
