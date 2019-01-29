@@ -6,7 +6,11 @@ from extract_features import *
 from make_labels_pred import *
 from evaluation import *
 from visualize import *
+import tensorflow as tf
 
+tf.app.flags.DEFINE_string(
+    'model_name', 'inception_v3', 'The name of the architecture to train.')
+FLAGS = tf.app.flags.FLAGS
 
 if __name__ == '__main__':
     if os.path.exists(IMG_DIR):
@@ -14,7 +18,7 @@ if __name__ == '__main__':
         make_labels_true()
 
         # extract image features using MobileNet V2
-        extract_features()
+        extract_features(FLAGS.model_name)
 
         # make cluster using K-Means algorithm
         make_labels_pred()

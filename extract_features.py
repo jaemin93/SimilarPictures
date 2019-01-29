@@ -5,12 +5,11 @@ import os
 import time
 import numpy as np
 import tensorflow as tf
-from models.mobilenet_v2_140_224 import MobileNet2, get_encoded_image
-from models.inception_resnet_v2 import Inception_resnet_v2, get_encoded_image
+from models.model import *
 from config import *
 
 
-def extract_features():
+def extract_features(model_name):
     """
     IMG_DIR에 있는 모든 이미지에 대해 MobineNet V2 특징 벡터를 추출합니다.
     추출된 특징 벡터는 DATA_DIR/FEATURES.npy 에 저장됩니다.
@@ -31,9 +30,8 @@ def extract_features():
     batched_dataset = dataset.batch(BATCH_SIZE)
     iterator = batched_dataset.make_one_shot_iterator()
     next_batch = iterator.get_next()
-
     # build dnn model
-    model = Inception_resnet_v2()
+    model = Network_Model(model_name)
     sess = tf.Session()
     sess.run(tf.global_variables_initializer())
 
@@ -68,4 +66,4 @@ def extract_features():
 
 
 if __name__ == '__main__':
-    extract_features()
+    extract_features(model_name)

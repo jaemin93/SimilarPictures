@@ -1,25 +1,25 @@
 """
-NasNet 클래스 입니다. Tensorflow Hub에서 다운받은 Pre-train 모델을 사용합니다.
+Model 클래스 입니다. Tensorflow Hub에서 다운받은 Pre-train 모델을 사용합니다.
 """
 import tensorflow as tf
 import tensorflow_hub as hub
-
+from config import *
 
 def get_encoded_image(image_path):
     encoded_image = tf.gfile.FastGFile(image_path, 'rb').read()
     return encoded_image
 
 
-class NasNet:
-    def __init__(self):
-        self.module_url = "https://tfhub.dev/google/imagenet/nasnet_mobile/feature_vector/1"
+class Network_Model:
+    def __init__(self, model_name):
+        self.module_url = mapping[model_name][0]
         self.filename = tf.placeholder(tf.string, shape=[None], name='filename')
         self.encoded_images = tf.placeholder(tf.string, shape=[None], name='encoded_images')
         self.features = self.build_model()
-        self.output_size = 1056
+        self.output_size = mapping[model_name][1]
 
     def build_model(self):
-        # build nasnet mobile model using tensorflow hub
+        # build nasnet large model using tensorflow hub
         image_module = hub.Module(self.module_url)
         image_size = hub.get_expected_image_size(image_module)
 
