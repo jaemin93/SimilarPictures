@@ -25,7 +25,7 @@ mapping = {'inception_v3':['https://tfhub.dev/google/imagenet/inception_v3/featu
            'mobilenet_v2_035_96':['https://tfhub.dev/google/imagenet/mobilenet_v2_035_96/feature_vector/2', 1280],
            'mobilenet_v2_075_96':['https://tfhub.dev/google/imagenet/mobilenet_v2_075_96/feature_vector/2', 1280],
            'resnet_v2_101':['https://tfhub.dev/google/imagenet/resnet_v2_101/feature_vector/1', 2048],
-           'amoebanet_a_n18_f448':['https://tfhub.dev/google/imagenet/amoebanet_a_n18_f448/feature_vector/1', 7168,]
+           'amoebanet_a_n18_f448':['https://tfhub.dev/google/imagenet/amoebanet_a_n18_f448/feature_vector/1', 7168],
            'mobilenet_v2_050_96':['https://tfhub.dev/google/imagenet/mobilenet_v2_050_96/feature_vector/2', 1280],
            'mobilenet_v2_075_192':['https://tfhub.dev/google/imagenet/mobilenet_v2_075_192/feature_vector/2', 1280],
            'mobilenet_v1_025_128':['https://tfhub.dev/google/imagenet/mobilenet_v1_025_128/feature_vector/1', 256],

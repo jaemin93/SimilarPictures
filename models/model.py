@@ -3,7 +3,7 @@ Model 클래스 입니다. Tensorflow Hub에서 다운받은 Pre-train 모델을
 """
 import tensorflow as tf
 import tensorflow_hub as hub
-from config import *
+from models.model_map import *
 
 def get_encoded_image(image_path):
     encoded_image = tf.gfile.FastGFile(image_path, 'rb').read()

@@ -16,6 +16,8 @@ TEST_DIR = '../img/' + TEST
 
 # files generated
 IMG_PATHS = "img_paths.txt"     # 이미지 파일 리스트
+FEATURES = "features"           # 이미지 특징 벡터
+SIGNATURES = "signature"        # 이미지 시그니쳐
 LABELS_TRUE = "labels_true"     # 정답 레이블
 LABELS_PRED = "labels_pred"     # 예측 레이블
 
