@@ -11,11 +11,12 @@ import tensorflow as tf
 
 tf.app.flags.DEFINE_string(
     'model_name', 'mobilenet_v2_140_224', 'The name of the architecture to train.')
-tf.app.flags.DEFINE_string(
-    'number_of_cluster', '0', 'The name of the architecture to train.')
+tf.app.flags.DEFINE_integer(
+    'number_of_cluster', 70, 'The name of the architecture to train.')
 FLAGS = tf.app.flags.FLAGS
 
 if __name__ == '__main__':
+    print(FLAGS.number_of_cluster)
     if os.path.exists(IMG_DIR):
         # make true labels by analysing image filename
         make_labels_true()

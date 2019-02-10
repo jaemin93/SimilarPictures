@@ -75,7 +75,7 @@ def _main():
         except:
             print('miss match!')
     print('k_cluster =', int(len(k_img_list)/k_count))
-    
+    return k_count
 
 def total_images_list(image_directory, image_list):
     for img in os.listdir(image_directory):

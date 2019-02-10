@@ -6,7 +6,7 @@ import numpy as np
 from sklearn.cluster import KMeans
 from sklearn import metrics
 from config import *
-
+from feature_mapping import pred_num_cluster
 
 def make_labels_pred(number_of_k):
     """
@@ -16,9 +16,11 @@ def make_labels_pred(number_of_k):
     """
     # load datasets
     features = np.load(os.path.join(DATA_DIR, FEATURES + ".npy"))
-
+    print(number_of_k)
     # estimate number of clusters
-    if int(number_of_k) != -1:
+    if int(number_of_k) == -1:
+        NUM_IMGS_PER_MODEL = pred_num_cluster._main()
+    else:
         NUM_IMGS_PER_MODEL = int(number_of_k)
     num_clusters = int(len(features)/NUM_IMGS_PER_MODEL)
     print("Estimated num_clusters: %d" % num_clusters)
