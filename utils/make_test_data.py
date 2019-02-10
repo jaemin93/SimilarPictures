@@ -13,4 +13,4 @@ def test_dataset(path, test_path):
 
 if __name__ == "__main__":
     test_dataset('C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\img\\dummy', 'C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\img\\test')
-
+    print('Done.')

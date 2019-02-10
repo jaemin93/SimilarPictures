@@ -13,7 +13,7 @@ from config import *
 def visualize():
     # loading datasets
     features = np.load(os.path.join(DATA_DIR, FEATURES + ".npy"))
-    labels_true = np.load(os.path.join(DATA_DIR, LABELS_TURE + ".npy"))
+    labels_true = np.load(os.path.join(DATA_DIR, LABELS_TRUE + ".npy"))
     labels_pred = np.load(os.path.join(DATA_DIR, LABELS_PRED + ".npy"))
 
     # plot true labels

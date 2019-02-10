@@ -22,7 +22,7 @@ def make_labels_pred():
     print("Estimated num_clusters: %d" % num_clusters)
 
     # make prediction
-    labels_pred = KMeans(n_clusters=num_clusters, verbose=0).fit_predict(features)
+    labels_pred = KMeans(n_clusters=4, verbose=0).fit_predict(features)
 
     # save predicted labels
     np.save(os.path.join(DATA_DIR, LABELS_PRED + ".npy"), labels_pred)

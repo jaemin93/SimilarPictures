@@ -39,6 +39,7 @@ def make_labels_true():
     # additionally save npy and tsv
     np.save(os.path.join(DATA_DIR, LABELS_TRUE + ".npy"), labels_true)
     np.savetxt(os.path.join(DATA_DIR, LABELS_TRUE + ".tsv"), labels_true, "%s", delimiter="\t")
+    np.savetxt(os.path.join(DATA_DIR, LABELS_TRUE + ".txt"), labels_true, "%s", delimiter="\t")
 
 
 if __name__ == '__main__':

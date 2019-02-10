@@ -6,10 +6,11 @@ from extract_features import *
 from make_labels_pred import *
 from evaluation import *
 from visualize import *
+from config import *
 import tensorflow as tf
 
 tf.app.flags.DEFINE_string(
-    'model_name', 'inception_v3', 'The name of the architecture to train.')
+    'model_name', 'mobilenet_v2_140_224', 'The name of the architecture to train.')
 FLAGS = tf.app.flags.FLAGS
 
 if __name__ == '__main__':
@@ -24,7 +25,7 @@ if __name__ == '__main__':
         make_labels_pred()
 
         # evaluate clustering result by adjusted Rand index
-        evaluation()
+        evaluation(os.path.join('C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\data\\dummy', LABELS_TRUE + ".txt"), os.path.join('C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\data\\dummy', LABELS_PRED + ".txt"))
 
         # visualize clustering using t-SNE
         visualize()
