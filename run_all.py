@@ -11,6 +11,8 @@ import tensorflow as tf
 
 tf.app.flags.DEFINE_string(
     'model_name', 'mobilenet_v2_140_224', 'The name of the architecture to train.')
+tf.app.flags.DEFINE_string(
+    'number_of_cluster', '0', 'The name of the architecture to train.')
 FLAGS = tf.app.flags.FLAGS
 
 if __name__ == '__main__':
@@ -22,7 +24,7 @@ if __name__ == '__main__':
         extract_features(FLAGS.model_name)
 
         # make cluster using K-Means algorithm
-        make_labels_pred()
+        make_labels_pred(FLAGS.number_of_cluster)
 
         # evaluate clustering result by adjusted Rand index
         evaluation(os.path.join('C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\data\\dummy', LABELS_TRUE + ".txt"), os.path.join('C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\data\\dummy', LABELS_PRED + ".txt"))

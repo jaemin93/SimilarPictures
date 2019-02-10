@@ -8,7 +8,7 @@ from sklearn import metrics
 from config import *
 
 
-def make_labels_pred():
+def make_labels_pred(number_of_k):
     """
     K-Means 알고리즘으로 특징 벡터를 클러스터링 하는 함수입니다.
     예측 레이블은 DATA_DIR/LABELS_PRED.npy 에 저장됩니다.
@@ -18,6 +18,8 @@ def make_labels_pred():
     features = np.load(os.path.join(DATA_DIR, FEATURES + ".npy"))
 
     # estimate number of clusters
+    if int(number_of_k) != -1:
+        NUM_IMGS_PER_MODEL = int(number_of_k)
     num_clusters = int(len(features)/NUM_IMGS_PER_MODEL)
     print("Estimated num_clusters: %d" % num_clusters)
 
@@ -31,4 +33,4 @@ def make_labels_pred():
 
 
 if __name__ == '__main__':
-    make_labels_pred()
+    make_labels_pred(number_of_k)
