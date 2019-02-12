@@ -24,9 +24,9 @@ def make_labels_pred():
     print("Estimated num_clusters: %d" % num_clusters)
 
     # make prediction
-    '''kmeans 구조
+    '''kmeans 구조'''
     labels_pred = KMeans(n_clusters=num_clusters, verbose=0).fit_predict(features)
-    '''
+
     '''계층 구조
     mergings = linkage(features, method='complete')
     labels_pred = fcluster(mergings, 153, criterion='distance').fit_predict(features)
