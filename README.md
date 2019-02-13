@@ -85,9 +85,10 @@ python make_labels_pred.py
 실행을 하면 original 데이터에서 사용자가 원하는 갯수만큼 랜덤으로 뽑아서 test 데이터를 설정한 경로에 구성합니다.
 다음 test data들을 차례대로 Top-5 출력하고 label_true.txt, label_pred.txt, img_paths.txt를 만듭니다.
 
-Dataset | Training Set Size | Testing Set Size | Number of Classes | Comments
-:------:|:---------------:|:---------------------:|:-----------:|:-----------:
-Flowers|2500 | 2500 | 5 | Various sizes (source: Flickr)
-[Cifar10](https://www.cs.toronto.edu/~kriz/cifar.html) | 60k| 10k | 10 |32x32 color
-[MNIST](http://yann.lecun.com/exdb/mnist/)| 60k | 10k | 10 | 28x28 gray
-[ImageNet](http://www.image-net.org/challenges/LSVRC/2012/)|1.2M| 50k | 1000 | Various sizes
+### STEP 5: model compare
+Model | Hub Module | Output size | Score 
+:------:|:---------------:|:---------------------:|:-----------:
+inception_v3 | [inception_v3_feature_vector](https://tfhub.dev/google/imagenet/inception_v3/feature_vector/1)| 2048 | 0 
+inception_resnet_v2 |[inception_resnet_v2_feature_vector](https://tfhub.dev/google/imagenet/inception_resnet_v2/feature_vector/1)| 1536 | 0
+mobilenet_v2_140_224| [mobilenet_v2_140_224_224_feature_vector](https://tfhub.dev/google/imagenet/mobilenet_v2_140_224/feature_vector/2)| 1792 | 0 
+resnet_v2_152|[resnet_v2_152_feature_vector](https://tfhub.dev/google/imagenet/resnet_v2_152/feature_vector/1)| 2048 | 0 
