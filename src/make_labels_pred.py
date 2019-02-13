@@ -28,7 +28,7 @@ def make_labels_pred(number_of_k):
 
     # make prediction
     labels_pred = KMeans(n_clusters=num_clusters, verbose=0).fit_predict(features)
-    labels_pred = AgglomerativeClustering(n_clusters=num_clusters, verbose=0).fit_predict(features)
+    # labels_pred = AgglomerativeClustering(n_clusters=num_clusters, verbose=0).fit_predict(features)
 
     # save predicted labels
     np.save(os.path.join(DATA_DIR, LABELS_PRED + ".npy"), labels_pred)

@@ -12,7 +12,7 @@ def get_encoded_image(image_path):
 
 class Network_Model:
     def __init__(self, model_name):
-        # self.module_url = mapping[model_name][0]
+        self.module_url = mapping[model_name][0]
         self.filename = tf.placeholder(tf.string, shape=[None], name='filename')
         self.encoded_images = tf.placeholder(tf.string, shape=[None], name='encoded_images')
         self.features = self.build_model()
@@ -20,8 +20,6 @@ class Network_Model:
 
     def build_model(self):
         # build model using tensorflow hub
-        image_module = hub.create_module_spec_from_saved_model('C:\\Users\\iceba\\develop\\inception_resnet_v2.pb')
-        print(1)
         image_module = hub.Module(self.module_url)
         image_size = hub.get_expected_image_size(image_module)
 
