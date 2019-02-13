@@ -13,6 +13,7 @@ tf.app.flags.DEFINE_string(
     'model_name', 'mobilenet_v2_140_224', 'The name of the architecture to train.')
 tf.app.flags.DEFINE_integer(
     'number_of_cluster', 70, 'The name of the architecture to train.')
+    
 FLAGS = tf.app.flags.FLAGS
 
 if __name__ == '__main__':

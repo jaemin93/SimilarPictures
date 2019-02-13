@@ -20,62 +20,45 @@ socket.getaddrinfo('127.0.0.1', 8080)
 
 np.random.seed(10)
 
-IMAGE_1_URL = 'C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\img\\tensorflow_hub_img\\5.jpg'
-IMAGE_2_URL = 'C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\img\\tensorflow_hub_img\\6.jpg'
+IMAGE_1_URL = 'C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\img\\tmp\\1 (1).jpg'
+IMAGE_2_URL = 'C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\img\\tmp\\1 (2).jpg'
 IMAGE_DIRECTORY = 'C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\img\\feature_mapping'
 
 IMAGE_1_JPG = 'image_1.jpg'
 IMAGE_2_JPG = 'image_2.jpg'
 
 def _main():
-    k_count = 0
-    k_img_list = list()
-    total_images_list(IMAGE_DIRECTORY, k_img_list)
-    random_index = random.randrange(0, len(k_img_list))
-    IMAGE_1_URL = k_img_list[random_index]
-    print(random_index)
-    for idx, i in enumerate(k_img_list): 
-        print('matching images:', k_count)
-        IMAGE_2_URL = i
-        print(IMAGE_1_URL, IMAGE_2_URL, sep='\n')
-        download_and_resize_image(IMAGE_1_URL, IMAGE_1_JPG)
-        download_and_resize_image(IMAGE_2_URL, IMAGE_2_JPG)
+    download_and_resize_image(IMAGE_1_URL, IMAGE_1_JPG)
+    download_and_resize_image(IMAGE_2_URL, IMAGE_2_JPG)
 
-        tf.reset_default_graph()
-        tf.logging.set_verbosity(tf.logging.FATAL)
+    tf.reset_default_graph()
+    tf.logging.set_verbosity(tf.logging.FATAL)
 
-        m = hub.Module('https://tfhub.dev/google/delf/1')
+    m = hub.Module('https://tfhub.dev/google/delf/1')
 
-        image_placeholder = tf.placeholder(tf.float32, shape=(None, None, 3), name='input_image')
+    image_placeholder = tf.placeholder(tf.float32, shape=(None, None, 3), name='input_image')
 
-        module_inputs={
-            'image': image_placeholder,
-            'score_threshold': 85.0,
-            'image_scales': [0.25, 0.3536, 0.5, 0.7071, 1.0, 1.4142, 2.0],
-            'max_feature_num': 1000,
-        }
+    module_inputs={
+        'image': image_placeholder,
+        'score_threshold': 60.0,
+        'image_scales': [0.25, 0.3536, 0.5, 0.7071, 1.0, 1.4142, 2.0],
+        'max_feature_num': 1000,
+    }
 
-        module_outputs = m(module_inputs, as_dict=True)
-        image_tf = image_input_fn([IMAGE_1_JPG, IMAGE_2_JPG])
+    module_outputs = m(module_inputs, as_dict=True)
+    image_tf = image_input_fn([IMAGE_1_JPG, IMAGE_2_JPG])
 
-        with tf.train.MonitoredSession() as sess:
-            results_dict = dict()
-            for image_path in [IMAGE_1_JPG, IMAGE_2_JPG]:
-                image = sess.run(image_tf)
-                print('Extracting locations and descr iptors from %s' % image_path)
-                results_dict[image_path] = sess.run(
-                    [module_outputs['locations'], module_outputs['descriptors']],
-                    feed_dict={image_placeholder: image})
+    with tf.train.MonitoredSession() as sess:
+        results_dict = dict()
+        for image_path in [IMAGE_1_JPG, IMAGE_2_JPG]:
+            image = sess.run(image_tf)
+            print('Extracting locations and descr iptors from %s' % image_path)
+            results_dict[image_path] = sess.run(
+                [module_outputs['locations'], module_outputs['descriptors']],
+                feed_dict={image_placeholder: image})
 
-        # if match_images(results_dict, IMAGE_1_JPG, IMAGE_2_JPG) > 20:
-        #     k_count += 1
-        try:
-            if match_images(results_dict, IMAGE_1_JPG, IMAGE_2_JPG) > 10:
-                k_count = k_count + 1
-        except:
-            print('miss match!')
-    print('k_cluster =', int(len(k_img_list)/k_count))
-    return k_count
+    match_images(results_dict, IMAGE_1_JPG, IMAGE_2_JPG)
+
 
 def total_images_list(image_directory, image_list):
     for img in os.listdir(image_directory):
@@ -152,24 +135,24 @@ def match_images(results_dict, image_1_path, image_2_path):
     
     # the number of inliers as the score for retrieved images
     print('Found %d inliers' % sum(inliers))
-    return sum(inliers)
+
     # Visualize correspondences
-    # _, ax = plt.subplots()
-    # img_1 = mpimg.imread(image_1_path)
-    # img_2 = mpimg.imread(image_2_path)
-    # inlier_idxs = np.nonzero(inliers)[0]
-    # plot_matches(
-    #     ax,
-    #     img_1,
-    #     img_2,
-    #     locations_1_to_use,
-    #     locations_2_to_use,
-    #     np.column_stack((inlier_idxs, inlier_idxs)),
-    #     matches_color='b'
-    # )
-    # ax.axis('off')
-    # ax.set_title('DELF correspondences')
-    # plt.show()
+    _, ax = plt.subplots()
+    img_1 = mpimg.imread(image_1_path)
+    img_2 = mpimg.imread(image_2_path)
+    inlier_idxs = np.nonzero(inliers)[0]
+    plot_matches(
+        ax,
+        img_1,
+        img_2,
+        locations_1_to_use,
+        locations_2_to_use,
+        np.column_stack((inlier_idxs, inlier_idxs)),
+        matches_color='b'
+    )
+    ax.axis('off')
+    ax.set_title('DELF correspondences')
+    plt.show()
 
 
 

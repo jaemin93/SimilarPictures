@@ -3,7 +3,7 @@ mapping = {'inception_v3':['https://tfhub.dev/google/imagenet/inception_v3/featu
            'mobilenet_v2_140_224':['https://tfhub.dev/google/imagenet/mobilenet_v2_140_224/feature_vector/2', 1792],
            'mobilenet_v1_100_224':['https://tfhub.dev/google/imagenet/mobilenet_v1_100_224/feature_vector/1', 1024],
            'mobilenet_v2_100_224':['https://tfhub.dev/google/imagenet/mobilenet_v2_100_224/feature_vector/2', 1280],
-           'inception_resnet_v2':['https://tfhub.dev/google/imagenet/inception_resnet_v2/feature_vector/1', 1536],
+           'inception_resnet_v2':['', 1536],
            'nasnet_large':['https://tfhub.dev/google/imagenet/nasnet_large/feature_vector/1', 4032],
            'nasnet_mobile':['https://tfhub.dev/google/imagenet/nasnet_mobile/feature_vector/1', 1056],
            'pnasnet_large':['https://tfhub.dev/google/imagenet/pnasnet_large/feature_vector/2', 4320],
