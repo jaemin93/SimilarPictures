@@ -59,6 +59,5 @@ if __name__ == '__main__':
     
     labels_pred2 가 좀 더 정확하기 때문에 점수가 높게 평가 됩니다.
     """
-    score = evaluation(os.path.join(DATA_DIR, LABELS_TRUE + ".txt"), os.path.join(DATA_DIR, LABELS_PRED + ".txt"))
-    #score = evaluation(os.path.join('C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\data\\dummy', LABELS_TRUE + ".txt"), os.path.join('C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\data\\dummy', LABELS_PRED + ".txt"))
+    score = evaluation('C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\SimilarPictures\\data\\test\\labels_true.txt', 'C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\SimilarPictures\\data\\test\\labels_pred.txt')
     print("Rand Index: %s" % score)

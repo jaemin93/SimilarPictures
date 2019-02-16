@@ -22,7 +22,7 @@ np.random.seed(10)
 
 # IMAGE_1_URL = 'C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\img\\tensorflow_hub_img\\5.jpg'
 # IMAGE_2_URL = 'C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\img\\tensorflow_hub_img\\6.jpg'
-IMAGE_DIRECTORY = 'C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\img\\feature_mapping'
+IMAGE_DIRECTORY = 'C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\img\\test'
 
 IMAGE_1_JPG = 'image_1.jpg'
 IMAGE_2_JPG = 'image_2.jpg'
@@ -50,7 +50,7 @@ def _main():
 
         module_inputs={
             'image': image_placeholder,
-            'score_threshold': 85.0,
+            'score_threshold': 100.0,
             'image_scales': [0.25, 0.3536, 0.5, 0.7071, 1.0, 1.4142, 2.0],
             'max_feature_num': 1000,
         }
@@ -151,25 +151,6 @@ def match_images(results_dict, image_1_path, image_2_path):
     # the number of inliers as the score for retrieved images
     print('Found %d inliers' % sum(inliers))
     return sum(inliers)
-    # Visualize correspondences
-    # _, ax = plt.subplots()
-    # img_1 = mpimg.imread(image_1_path)
-    # img_2 = mpimg.imread(image_2_path)
-    # inlier_idxs = np.nonzero(inliers)[0]
-    # plot_matches(
-    #     ax,
-    #     img_1,
-    #     img_2,
-    #     locations_1_to_use,
-    #     locations_2_to_use,
-    #     np.column_stack((inlier_idxs, inlier_idxs)),
-    #     matches_color='b'
-    # )
-    # ax.axis('off')
-    # ax.set_title('DELF correspondences')
-    # plt.show()
-
-
 
 
 if __name__ == "__main__":

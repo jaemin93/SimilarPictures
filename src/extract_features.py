@@ -11,7 +11,7 @@ from config import *
 
 def extract_features(model_name):
     """
-    IMG_DIR에 있는 모든 이미지에 대해 MobineNet V2 특징 벡터를 추출합니다.
+    IMG_DIR에 있는 모든 이미지에 대해 Any Network 특징 벡터를 추출합니다.
     추출된 특징 벡터는 DATA_DIR/FEATURES.npy 에 저장됩니다.
     BATCH_SIZE로 배치 사이즈를 조절할 수 있습니다.
     :return: 없음

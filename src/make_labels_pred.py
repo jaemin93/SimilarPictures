@@ -4,10 +4,13 @@
 import os
 import numpy as np
 from sklearn.cluster import KMeans
-from sklearn.cluster import AgglomerativeClustering
+from sklearn import datasets
+from scipy.cluster.hierarchy import linkage, dendrogram
 from sklearn import metrics
 from config import *
-from feature_mapping import pred_num_cluster_challenge
+import matplotlib.pyplot as plt
+import pandas as pd
+from feature_mapping import pred_num_cluster_challenge as pred_num_cluster
 
 def make_labels_pred(number_of_k):
     """
@@ -17,18 +20,17 @@ def make_labels_pred(number_of_k):
     """
     # load datasets
     features = np.load(os.path.join(DATA_DIR, FEATURES + ".npy"))
-    print(number_of_k)
+    num_clusters = int(number_of_k)
+
     # estimate number of clusters
     if int(number_of_k) == -1:
         NUM_IMGS_PER_MODEL = pred_num_cluster._main()
-    else:
-        NUM_IMGS_PER_MODEL = int(number_of_k)
-    num_clusters = int(len(features)/NUM_IMGS_PER_MODEL)
+        num_clusters = int(len(features)/NUM_IMGS_PER_MODEL)
+
     print("Estimated num_clusters: %d" % num_clusters)
 
     # make prediction
     labels_pred = KMeans(n_clusters=num_clusters, verbose=0).fit_predict(features)
-    # labels_pred = AgglomerativeClustering(n_clusters=num_clusters, verbose=0).fit_predict(features)
 
     # save predicted labels
     np.save(os.path.join(DATA_DIR, LABELS_PRED + ".npy"), labels_pred)
