@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-MobileNet V2 클래스 입니다. Tensorflow Hub에서 다운받은 Pre-train 모델을 사용합니다.
-"""
+
 import tensorflow as tf
 import tensorflow_hub as hub
 
