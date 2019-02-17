@@ -9,7 +9,6 @@ from scipy.cluster.hierarchy import linkage, dendrogram
 from sklearn import metrics
 from config import *
 import matplotlib.pyplot as plt
-import pandas as pd
 from feature_mapping import pred_num_cluster_challenge as pred_num_cluster
 
 def make_labels_pred(number_of_k):

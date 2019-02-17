@@ -11,77 +11,76 @@ import tensorflow as tf
 import tensorflow_hub as hub
 from six.moves.urllib.request import urlopen
 import random
-# from ..config import *
 import glob
 import os
 from itertools import accumulate
 import socket
 socket.getaddrinfo('127.0.0.1', 8080)
 
-np.random.seed(10)
+def _main(IMAGE_DIRECTORY):
+    count = 0
+    image_list = list()
+    for image_file_name in os.listdir(IMAGE_DIRECTORY):
+        image_file_location = IMAGE_DIRECTORY + os.sep + image_file_name
+        image_list.append(image_file_location)
 
-# IMAGE_1_URL = 'C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\img\\tensorflow_hub_img\\5.jpg'
-# IMAGE_2_URL = 'C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\img\\tensorflow_hub_img\\6.jpg'
-IMAGE_DIRECTORY = 'C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\img\\test'
+    tf.reset_default_graph()
+    tf.logging.set_verbosity(tf.logging.FATAL)
 
-IMAGE_1_JPG = 'image_1.jpg'
-IMAGE_2_JPG = 'image_2.jpg'
+    m = hub.Module('https://tfhub.dev/google/delf/1')
 
-def _main():
-    k_count = 0
-    k_img_list = list()
-    total_images_list(IMAGE_DIRECTORY, k_img_list)
-    random_index = random.randrange(0, len(k_img_list))
-    IMAGE_1_URL = k_img_list[random_index]
-    print(random_index)
-    for idx, i in enumerate(k_img_list): 
-        print('matching images:', k_count)
-        IMAGE_2_URL = i
-        print(IMAGE_1_URL, IMAGE_2_URL, sep='\n')
-        download_and_resize_image(IMAGE_1_URL, IMAGE_1_JPG)
-        download_and_resize_image(IMAGE_2_URL, IMAGE_2_JPG)
+    image_placeholder = tf.placeholder(tf.float32, shape=(None, None, 3), name='input_image')
 
-        tf.reset_default_graph()
-        tf.logging.set_verbosity(tf.logging.FATAL)
+    module_inputs={
+        'image': image_placeholder,
+        'score_threshold': 60.0,
+        'image_scales': [0.25, 0.3536, 0.5, 0.7071, 1.0, 1.4142, 2.0],
+        'max_feature_num': 1000,
+    }
 
-        m = hub.Module('https://tfhub.dev/google/delf/1')
-
-        image_placeholder = tf.placeholder(tf.float32, shape=(None, None, 3), name='input_image')
-
-        module_inputs={
-            'image': image_placeholder,
-            'score_threshold': 100.0,
-            'image_scales': [0.25, 0.3536, 0.5, 0.7071, 1.0, 1.4142, 2.0],
-            'max_feature_num': 1000,
-        }
-
-        module_outputs = m(module_inputs, as_dict=True)
-        image_tf = image_input_fn([IMAGE_1_JPG, IMAGE_2_JPG])
-
-        with tf.train.MonitoredSession() as sess:
-            results_dict = dict()
-            for image_path in [IMAGE_1_JPG, IMAGE_2_JPG]:
-                image = sess.run(image_tf)
-                print('Extracting locations and descr iptors from %s' % image_path)
-                results_dict[image_path] = sess.run(
-                    [module_outputs['locations'], module_outputs['descriptors']],
-                    feed_dict={image_placeholder: image})
-
+    module_outputs = m(module_inputs, as_dict=True)
+    image_tf = image_input_fn(image_list)
+    print('====Extracting locations and descr iptors from your test set!====')
+    Extracting_cnt = 0
+    with tf.train.MonitoredSession() as sess:
+        results_dict = dict()
+        for image_path in image_list:
+            image = sess.run(image_tf)
+            Extracting_cnt += 1
+            printProgress(cnt, len(img_paths), 'Progress:', 'Complete', 1, 50)
+            results_dict[image_path] = sess.run(
+                [module_outputs['locations'], module_outputs['descriptors']],
+                feed_dict={image_placeholder: image})
+    
+    random_index = random.randrange(0, len(image_list))
+    image_1 = image_list[random_index]
+    cnt = 0
+    print('====Feature mapping====')
+    for image_2 in image_list:
+        cnt += 1
+        printProgress(cnt, len(img_paths), 'Progress:', 'Complete', 1, 50)
         try:
-            if match_images(results_dict, IMAGE_1_JPG, IMAGE_2_JPG) > 10:
-                k_count = k_count + 1
+            if match_images(results_dict, image_1, image_2) > 15:
+                count += 1
         except:
-            print('miss match!')
-    print('k_cluster =', int(len(k_img_list)/k_count))
-    return k_count
+            pass
+    print(image_list[random_index], 'matches:',int(len(image_list)/count))
+    return int(len(image_list)/count)
 
 def total_images_list(image_directory, image_list):
     for img in os.listdir(image_directory):
         img_dir = image_directory + os.sep + img
         image_list.append(img_dir)
 
-    
-
+def printProgress (iteration, total, prefix = '', suffix = '', decimals = 1, barLength = 100):
+    formatStr = "{0:." + str(decimals) + "f}"
+    percent = formatStr.format(100 * (iteration / float(total)))
+    filledLength = int(round(barLength * iteration / float(total)))
+    bar = '#' * filledLength + '-' * (barLength - filledLength)
+    sys.stdout.write('\r%s |%s| %s%s %s' % (prefix, bar, percent, '%', suffix)),
+    if iteration == total:
+        sys.stdout.write('\n')
+        sys.stdout.flush()
 
 # title the images that will be processed by DELF
 def download_and_resize_image(url, filename, new_width=256, new_height=256):
@@ -153,8 +152,10 @@ def match_images(results_dict, image_1_path, image_2_path):
     return sum(inliers)
 
 
+
+
 if __name__ == "__main__":
-    _main()
+    _main(IMAGE_DIRECTORY)
 
 
 

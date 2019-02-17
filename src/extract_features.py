@@ -31,7 +31,9 @@ def extract_features(model_name):
     iterator = batched_dataset.make_one_shot_iterator()
     next_batch = iterator.get_next()
     # build dnn model
+    print('build dnn model')
     model = Network_Model(model_name)
+    print('finish!')
     sess = tf.Session()
     sess.run(tf.global_variables_initializer())
 

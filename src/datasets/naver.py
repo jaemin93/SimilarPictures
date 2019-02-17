@@ -31,7 +31,7 @@ slim = tf.contrib.slim
 
 _FILE_PATTERN = 'naver_%s_*.tfrecord'
 
-SPLITS_TO_SIZES = {'train': 50844, 'validation': 12711}
+SPLITS_TO_SIZES = {'train': 50844+12711, 'validation': 0}
 
 _NUM_CLASSES = 153
 
