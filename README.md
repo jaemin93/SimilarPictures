@@ -36,10 +36,10 @@ git clone https://github.com/jaemin93/SimilarPictures.git
 ## Model(Feature Vector) Compare (NaverDataSet에서 20% 샘플링하여 K-means 사용) 
 Model | Hub Module | Output size | Score 
 :------:|:---------------:|:---------------------:|:-----------:
-inception_v3 | [inception_v3_feature_vector](https://tfhub.dev/google/imagenet/inception_v3/feature_vector/1)| 2048 | 0 
-inception_resnet_v2 |[inception_resnet_v2_feature_vector](https://tfhub.dev/google/imagenet/inception_resnet_v2/feature_vector/1)| 1536 | 0
-mobilenet_v2_140_224| [mobilenet_v2_140_224_224_feature_vector](https://tfhub.dev/google/imagenet/mobilenet_v2_140_224/feature_vector/2)| 1792 | 0 
-resnet_v2_152|[resnet_v2_152_feature_vector](https://tfhub.dev/google/imagenet/resnet_v2_152/feature_vector/1)| 2048 | 0 
+inception_v3 | [inception_v3](https://tfhub.dev/google/imagenet/inception_v3/feature_vector/1)| 2048 | 39.4 
+inception_resnet_v2 |[inception_resnet_v2](https://tfhub.dev/google/imagenet/inception_resnet_v2/feature_vector/1)| 1536 | 0
+mobilenet_v2_140_224| [mobilenet_v2_140_224](https://tfhub.dev/google/imagenet/mobilenet_v2_140_224/feature_vector/2)| 1792 | 0 
+resnet_v2_152|[resnet_v2_152](https://tfhub.dev/google/imagenet/resnet_v2_152/feature_vector/1)| 2048 | 0 
 
 
 ## **원하는 모델로 Clustering**
