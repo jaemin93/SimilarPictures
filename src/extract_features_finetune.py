@@ -71,6 +71,7 @@ def extract_features():
     # get list all images
     img_paths = os.listdir(IMG_DIR)
     img_paths.sort()
+    img_paths = [os.path.join(IMG_DIR, filename) for filename in img_paths if filename.endswith(IMG_EXT)]
     
     # build dnn model
     model = Inception_resnet_v2()
