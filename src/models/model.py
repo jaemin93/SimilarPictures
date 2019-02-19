@@ -5,6 +5,8 @@ import tensorflow as tf
 import tensorflow_hub as hub
 from models.model_map import *
 
+slim = tf.contrib.slim
+
 def get_encoded_image(image_path):
     encoded_image = tf.gfile.FastGFile(image_path, 'rb').read()
     return encoded_image

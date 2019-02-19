@@ -4,6 +4,8 @@
 import os
 import numpy as np
 from sklearn.cluster import KMeans
+from sklearn.cluster import SpectralClustering
+from sklearn.cluster import DBSCAN
 from sklearn import datasets
 from scipy.cluster.hierarchy import linkage, dendrogram
 from sklearn import metrics
@@ -30,11 +32,23 @@ def make_labels_pred(number_of_k):
 
     # make prediction
     labels_pred = KMeans(n_clusters=num_clusters, verbose=0).fit_predict(features)
-
     # save predicted labels
     np.save(os.path.join(DATA_DIR, LABELS_PRED + ".npy"), labels_pred)
     np.savetxt(os.path.join(DATA_DIR, LABELS_PRED + ".tsv"), labels_pred, "%d", delimiter="\t")
     np.savetxt(os.path.join(DATA_DIR, LABELS_PRED + ".txt"), labels_pred, "%d", delimiter="\t")
+
+    labels_pred2 = SpectralClustering(n_clusters=num_clusters, affinity='nearest_neighbors',
+                           assign_labels='kmeans').fit_predict(features)
+
+    np.save(os.path.join(DATA_DIR, LABELS_PRED + '2' + ".npy"), labels_pred2)
+    np.savetxt(os.path.join(DATA_DIR, LABELS_PRED + '2' + ".tsv"), labels_pred2, "%d", delimiter="\t")
+    np.savetxt(os.path.join(DATA_DIR, LABELS_PRED + '2' + ".txt"), labels_pred2, "%d", delimiter="\t")
+
+    labels_pred3 = DBSCAN(eps=11.5, min_samples=10).fit_predict(features)
+
+    np.save(os.path.join(DATA_DIR, LABELS_PRED + '3' + ".npy"), labels_pred3)
+    np.savetxt(os.path.join(DATA_DIR, LABELS_PRED + '3' + ".tsv"), labels_pred3, "%d", delimiter="\t")
+    np.savetxt(os.path.join(DATA_DIR, LABELS_PRED + '3' + ".txt"), labels_pred3, "%d", delimiter="\t")
 
 
 if __name__ == '__main__':

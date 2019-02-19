@@ -78,7 +78,3 @@ class Inception_resnet_v2:
 
         decoded_images = tf.map_fn(_decode_and_resize_image, self.encoded_images, tf.float32)  # type: tf.Tensor
         return image_module(decoded_images)
-
-
-
-model = Inception_resnet_v2()

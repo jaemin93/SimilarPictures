@@ -5,7 +5,7 @@ MobileNet V2으로 이미지 특징 벡터를 추출하는 모듈입니다.
 """
 import tensorflow as tf
 from config import *
-from models.Inception_resnet_v2 import get_encoded_image, Inception_resnet_v2
+from models.model import *
 import os
 from tensorflow.python.platform import gfile
 import numpy as np
@@ -29,7 +29,7 @@ def add_jpeg_decoding():
   decoded_image_as_float = tf.image.convert_image_dtype(decoded_image,
                                                         tf.float32)
   decoded_image_4d = tf.expand_dims(decoded_image_as_float, 0)
-  resize_shape = tf.stack([299, 299]) #input_height, input_width
+  resize_shape = tf.stack([224, 224]) #input_height, input_width
   resize_shape_as_int = tf.cast(resize_shape, dtype=tf.int32)
   resized_image = tf.image.resize_bilinear(decoded_image_4d,
                                            resize_shape_as_int)
@@ -46,9 +46,9 @@ def printProgress (iteration, total, prefix = '', suffix = '', decimals = 1, bar
         sys.stdout.write('\n')
         sys.stdout.flush()
 
-def extract_features_fine_tuning(pb_path, fine_tuned_layer):
+def extract_features_fine_tuning(pb_path, fine_tuned_layer, model_name):
     """
-    IMG_DIR에 있는 모든 이미지에 대해 MobineNet V2 특징 벡터를 추출합니다.
+    IMG_DIR에 있는 모든 이미지에 대해 model_name 특징 벡터를 추출합니다.
     추출된 특징 벡터는 DATA_DIR/FEATURES.npy 에 저장됩니다.
     BATCH_SIZE로 배치 사이즈를 조절할 수 있습니다.
     :return: 없음
@@ -73,7 +73,7 @@ def extract_features_fine_tuning(pb_path, fine_tuned_layer):
     img_paths.sort()
     
     # build dnn model
-    model = Inception_resnet_v2()
+    model = Network_Model(model_name)
     sess = tf.Session()
     sess.run(tf.global_variables_initializer())
 
@@ -90,7 +90,7 @@ def extract_features_fine_tuning(pb_path, fine_tuned_layer):
         jpeg_data_tensor, decoded_image_tensor = add_jpeg_decoding()
         # get batch of features
         feature_data = get_bottleneck_data(sess, image_data, jpeg_data_tensor, decoded_image_tensor, bottleneck, image)
-        feature_data = feature_data.reshape(1,1536)
+        feature_data = feature_data.reshape(1,model.output_size)
         features = np.concatenate((features, feature_data))
     # save npy and tsv files
     if os.path.exists(DATA_DIR) is False:
@@ -100,4 +100,4 @@ def extract_features_fine_tuning(pb_path, fine_tuned_layer):
 
 
 if __name__ == '__main__':
-    extract_features_fine_tuning(pb_path, fine_tuned_layer)
+    extract_features_fine_tuning(pb_path, fine_tuned_layer, model_name)

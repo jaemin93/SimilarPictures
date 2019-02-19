@@ -61,3 +61,7 @@ if __name__ == '__main__':
     """
     score = evaluation(os.path.join(DATA_DIR, LABELS_TRUE + ".txt"), os.path.join(DATA_DIR, LABELS_PRED + ".txt"))
     print("Rand Index: %s" % score)
+    score2 = evaluation(os.path.join(DATA_DIR, LABELS_TRUE + ".txt"), os.path.join(DATA_DIR, LABELS_PRED + '2' + ".txt"))
+    print("Rand Index: %s" % score2)
+    score3 = evaluation(os.path.join(DATA_DIR, LABELS_TRUE + ".txt"), os.path.join(DATA_DIR, LABELS_PRED + '3' + ".txt"))
+    print("Rand Index: %s" % score3)

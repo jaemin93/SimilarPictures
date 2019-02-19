@@ -30,10 +30,11 @@ if __name__ == '__main__':
         # extract image features using MobileNet V2
 
         if os.path.exists(FLAGS.fine_tuning):
-            extract_features_fine_tuning(FLAGS.fine_tuning, FLAGS.fine_tuned_layer)
+            extract_features_fine_tuning(FLAGS.fine_tuning, FLAGS.fine_tuned_layer, FLAGS.model_name)
         else:
             print('you don`t have pb! cluster model:', FLAGS.model_name)
             extract_features(FLAGS.model_name)
+
 
         # make cluster using K-Means algorithm
         number_of_cluster = FLAGS.number_of_cluster
@@ -45,7 +46,7 @@ if __name__ == '__main__':
         evaluation(os.path.join(DATA_DIR, LABELS_TRUE + ".txt"), os.path.join(DATA_DIR, LABELS_PRED + ".txt"))
 
         # visualize clustering using t-SNE
-        visualize()
+        # visualize()
     else:
         print("Image dir not found.")
         pass

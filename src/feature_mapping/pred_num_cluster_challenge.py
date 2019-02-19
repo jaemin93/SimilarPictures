@@ -47,7 +47,7 @@ def _main(IMAGE_DIRECTORY):
         for image_path in image_list:
             image = sess.run(image_tf)
             Extracting_cnt += 1
-            printProgress(cnt, len(img_paths), 'Progress:', 'Complete', 1, 50)
+            printProgress(Extracting_cnt, len(img_paths), 'Progress:', 'Complete', 1, 50)
             results_dict[image_path] = sess.run(
                 [module_outputs['locations'], module_outputs['descriptors']],
                 feed_dict={image_placeholder: image})
