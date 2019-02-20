@@ -13,7 +13,7 @@ from config import *
 import matplotlib.pyplot as plt
 from feature_mapping import pred_num_cluster_challenge as pred_num_cluster
 
-def make_labels_pred(number_of_k):
+def make_labels_pred(number_of_k, eps, min_samples):
     """
     K-Means 알고리즘으로 특징 벡터를 클러스터링 하는 함수입니다.
     예측 레이블은 DATA_DIR/LABELS_PRED.npy 에 저장됩니다.
@@ -44,7 +44,7 @@ def make_labels_pred(number_of_k):
     np.savetxt(os.path.join(DATA_DIR, LABELS_PRED + '2' + ".tsv"), labels_pred2, "%d", delimiter="\t")
     np.savetxt(os.path.join(DATA_DIR, LABELS_PRED + '2' + ".txt"), labels_pred2, "%d", delimiter="\t")
 
-    labels_pred3 = DBSCAN(eps=11.5, min_samples=10).fit_predict(features)
+    labels_pred3 = DBSCAN(eps=eps, min_samples=min_samples).fit_predict(features)
 
     np.save(os.path.join(DATA_DIR, LABELS_PRED + '3' + ".npy"), labels_pred3)
     np.savetxt(os.path.join(DATA_DIR, LABELS_PRED + '3' + ".tsv"), labels_pred3, "%d", delimiter="\t")
@@ -52,4 +52,4 @@ def make_labels_pred(number_of_k):
 
 
 if __name__ == '__main__':
-    make_labels_pred(number_of_k)
+    make_labels_pred(number_of_k, eps, min_samples)

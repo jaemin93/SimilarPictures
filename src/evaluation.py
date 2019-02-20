@@ -60,8 +60,8 @@ if __name__ == '__main__':
     labels_pred2 가 좀 더 정확하기 때문에 점수가 높게 평가 됩니다.
     """
     score = evaluation(os.path.join(DATA_DIR, LABELS_TRUE + ".txt"), os.path.join(DATA_DIR, LABELS_PRED + ".txt"))
-    print("Rand Index: %s" % score)
+    print("Rand Index(K-means): %s" % score)
     score2 = evaluation(os.path.join(DATA_DIR, LABELS_TRUE + ".txt"), os.path.join(DATA_DIR, LABELS_PRED + '2' + ".txt"))
-    print("Rand Index: %s" % score2)
+    print("Rand Index(SpectralClustering): %s" % score2)
     score3 = evaluation(os.path.join(DATA_DIR, LABELS_TRUE + ".txt"), os.path.join(DATA_DIR, LABELS_PRED + '3' + ".txt"))
-    print("Rand Index: %s" % score3)
+    print("Rand Index(DBSCAN): %s" % score3)

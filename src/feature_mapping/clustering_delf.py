@@ -21,6 +21,7 @@ socket.getaddrinfo('127.0.0.1', 8080)
 def _main(IMAGE_DIRECTORY):
     count = 0
     image_list = list()
+    total = len(image_list)
     for image_file_name in os.listdir(IMAGE_DIRECTORY):
         image_file_location = IMAGE_DIRECTORY + os.sep + image_file_name
         image_list.append(image_file_location)
@@ -54,9 +55,9 @@ def _main(IMAGE_DIRECTORY):
                 feed_dict={image_placeholder: image})
     
     cluster_list = list()
-    cnt = 0
     print('====Feature mapping====')
     while True:
+        cnt = 0
         if len(image_list) < 2:
             break
         tmp = list()
@@ -76,9 +77,13 @@ def _main(IMAGE_DIRECTORY):
         
         delete_info_list(image_list, tmp)
         del tmp
-
-    for i in cluster_list:
-        print(i)
+        
+    with open('label_pred_delf.txt', 'w') as f:
+        for i in cluster_list:
+            f.write(i+'\n')
+        for j in range(total - len(cluster_list)):
+            f.write('-1\n')
+        
         
     print(image_list[random_index], 'matches:',int(len(image_list)/count))
     return int(len(image_list)/count)

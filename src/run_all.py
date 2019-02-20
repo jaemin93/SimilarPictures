@@ -19,6 +19,10 @@ tf.app.flags.DEFINE_string(
     'fine_tuning', '/path/to/your/pb', 'there is pb file(fine tuned) in your path.')
 tf.app.flags.DEFINE_string(
     'fine_tuned_layer', 'InceptionResnetV2/Logits/AvgPool_1a_8x8/AvgPool:0', 'fine tuned layer in your model.')
+tf.app.flags.DEFINE_integer(
+    'eps', '10', 'eps안에 있으면 군집')
+tf.app.flags.DEFINE_integer(
+    'min_samples', '10', '군집된 개수가 최소 10개여야 군집화')
     
 FLAGS = tf.app.flags.FLAGS
 
@@ -40,7 +44,7 @@ if __name__ == '__main__':
         number_of_cluster = FLAGS.number_of_cluster
         if number_of_cluster == -1:
             number_of_cluster = pred_num_cluster_challenge._main(IMG_DIR)
-        make_labels_pred(number_of_cluster)
+        make_labels_pred(number_of_cluster, FLAGS.eps, FLAGS.min_samples)
 
         # evaluate clustering result by adjusted Rand index
         evaluation(os.path.join(DATA_DIR, LABELS_TRUE + ".txt"), os.path.join(DATA_DIR, LABELS_PRED + ".txt"))

@@ -13,8 +13,8 @@ import os
 import cv2
 
 def _main():
-    ORIGINAL_IMAGE = 'C:\\Users\\iceba\\develop\\data\\dummy\\img\\naver_photos\\original'
-    DIVIDE_IMAGE = 'C:\\Users\\iceba\\develop\\data\\dummy\\img\\naver_photos\\total2'
+    ORIGINAL_IMAGE = 'C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\img\\dummy'
+    DIVIDE_IMAGE = 'C:\\Users\\iceba\\develop\\python\\naver_d2_fest_6th\\img\\total'
 
     label_check_list = list()
     idx = 1

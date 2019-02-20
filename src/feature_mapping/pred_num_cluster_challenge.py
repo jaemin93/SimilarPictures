@@ -15,6 +15,7 @@ import glob
 import os
 from itertools import accumulate
 import socket
+import sys
 socket.getaddrinfo('127.0.0.1', 8080)
 
 def _main(IMAGE_DIRECTORY):
@@ -58,7 +59,7 @@ def _main(IMAGE_DIRECTORY):
     print('====Feature mapping====')
     for image_2 in image_list:
         cnt += 1
-        printProgress(cnt, len(img_paths), 'Progress:', 'Complete', 1, 50)
+        printProgress(cnt, len(image_list), 'Progress:', 'Complete', 1, 50)
         try:
             if match_images(results_dict, image_1, image_2) > 15:
                 count += 1
