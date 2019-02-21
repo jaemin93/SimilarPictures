@@ -166,6 +166,8 @@ python run_all.py \
     --number_of_cluster=[개수를 모른다면 -1]
 ```
 
+
+
 # Evalution
 <a id='Eval'></a>
 Clustering이 얼마나 잘되었는지 확인해 봅시다. run_all.py를 실행하면 데이터들이 얼마나 군집화가 잘되었는지 t-sne를 통하여 확인하실수 있습니다. 이제 score값을 확인해볼까요? 
