@@ -185,7 +185,7 @@ Rand Index(DBSCAN):             0.xx
 
 좋은 점수가 나오셨길 바랍니다! 
 
-* fine tuning된 모델을 사용했을 때 예상과 다른 결과가 나온다면 pb 파일을 확인하시길 바랍니다. (<a href='retrain'>step3를 참고하세요)
+* fine tuning된 모델을 사용했을 때 예상과 다른 결과가 나온다면 pb 파일을 확인하시길 바랍니다. (<a href='retrain'>Fine-tuning의 step3를 참고하세요</a><br>)
 
 # Chanllenge
 <a id='Chanllenge'></a>
