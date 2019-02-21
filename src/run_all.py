@@ -20,9 +20,9 @@ tf.app.flags.DEFINE_string(
 tf.app.flags.DEFINE_string(
     'fine_tuned_layer', 'InceptionResnetV2/Logits/AvgPool_1a_8x8/AvgPool:0', 'fine tuned layer in your model.')
 tf.app.flags.DEFINE_integer(
-    'eps', '10', 'eps안에 있으면 군집')
+    'eps', 10, 'eps안에 있으면 군집')
 tf.app.flags.DEFINE_integer(
-    'min_samples', '10', '군집된 개수가 최소 10개여야 군집화')
+    'min_samples', 10, '군집된 개수가 최소 10개여야 군집화')
     
 FLAGS = tf.app.flags.FLAGS
 
