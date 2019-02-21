@@ -113,6 +113,7 @@ $ python download_and_convert_data.py --dataset_name=[데이터셋이름] --data
 ```
 
 ## Step 3:  Retrain (fine tuning)
+<a id='retrain'></a>
 
 이제 변환된 tfrecord들을 Retrain 합시다!
 [models](https://github.com/tensorflow/models) 을 clone 합니다.
@@ -184,7 +185,7 @@ Rand Index(DBSCAN):             0.xx
 
 좋은 점수가 나오셨길 바랍니다! 
 
-* fine tuning된 모델을 사용했을 때 예상과 다른 결과가 나온다면 pb 파일을 확인하시길 바랍니다. (<a href='## Step 3:  Retrain (fine tuning)'>step3를 참고하세요)
+* fine tuning된 모델을 사용했을 때 예상과 다른 결과가 나온다면 pb 파일을 확인하시길 바랍니다. (<a href='retrain'>step3를 참고하세요)
 
 # Chanllenge
 <a id='Chanllenge'></a>
