@@ -47,10 +47,11 @@ if __name__ == '__main__':
         make_labels_pred(number_of_cluster, FLAGS.eps, FLAGS.min_samples)
 
         # evaluate clustering result by adjusted Rand index
-        evaluation(os.path.join(DATA_DIR, LABELS_TRUE + ".txt"), os.path.join(DATA_DIR, LABELS_PRED + ".txt"))
-
+        score = evaluation(os.path.join(DATA_DIR, LABELS_TRUE + ".txt"), os.path.join(DATA_DIR, LABELS_PRED + ".txt"))
+        print("Rand Index(K-means): %s" % score)
+        
         # visualize clustering using t-SNE
-        # visualize()
+        visualize()
     else:
         print("Image dir not found.")
         pass
