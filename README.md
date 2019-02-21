@@ -43,7 +43,9 @@ inception_resnet_v2 |[inception_resnet_v2](https://tfhub.dev/google/imagenet/inc
 mobilenet_v2_140_224| [mobilenet_v2_140_224](https://tfhub.dev/google/imagenet/mobilenet_v2_140_224/feature_vector/2)| 1792 | 45.9(153) |
 resnet_v2_152|[resnet_v2_152](https://tfhub.dev/google/imagenet/resnet_v2_152/feature_vector/1)| 2048 | 42.1(153) |
 
-<img width="200" alt="inception_resnet_v2 t-SNE" src="[https://tinyurl.com/n4gtql8](https://github.com/jaemin93/SimilarPictures/blob/master/graph/cluster_t-SNE_.png)">
+<ul class="clearfix">
+   <div class="aspect_4_3"><img src="https://github.com/jaemin93/SimilarPictures/blob/master/graph/cluster_t-SNE_.png"></div>
+</ul>
 
 # Clustering a model from scratch.
 <a id='Clustering'></a>
