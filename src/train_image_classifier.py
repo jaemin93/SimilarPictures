@@ -209,6 +209,10 @@ tf.app.flags.DEFINE_integer('max_number_of_steps', None,
 #####################
 # Fine-Tuning Flags #
 #####################
+tf.app.flags.DEFINE_string(
+    'is_training', True,
+    'is_trining option of batch normalization')
+
 
 tf.app.flags.DEFINE_string(
     'checkpoint_path', None,
@@ -425,7 +429,7 @@ def main(_):
         FLAGS.model_name,
         num_classes=(dataset.num_classes - FLAGS.labels_offset),
         weight_decay=FLAGS.weight_decay,
-        is_training=True)
+        is_training=FLAGS.is_training)
 
     #####################################
     # Select the preprocessing function #
@@ -433,7 +437,7 @@ def main(_):
     preprocessing_name = FLAGS.preprocessing_name or FLAGS.model_name
     image_preprocessing_fn = preprocessing_factory.get_preprocessing(
         preprocessing_name,
-        is_training=True)
+        is_training=FLAGS.is_training)
 
     ##############################################################
     # Create a dataset provider that loads data from the dataset #
