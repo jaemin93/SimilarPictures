@@ -18,7 +18,7 @@ tf.app.flags.DEFINE_integer(
 tf.app.flags.DEFINE_string(
     'fine_tuning', '/path/to/your/pb', 'there is pb file(fine tuned) in your path.')
 tf.app.flags.DEFINE_string(
-    'fine_tuned_layer', 'InceptionResnetV2/Logits/AvgPool_1a_8x8/AvgPool:0', 'fine tuned layer in your model.')
+    'bottleneck_layer', 'InceptionResnetV2/Logits/AvgPool_1a_8x8/AvgPool:0', 'fine tuned layer in your model.')
 tf.app.flags.DEFINE_integer(
     'eps', 10, 'eps안에 있으면 군집')
 tf.app.flags.DEFINE_integer(
@@ -34,7 +34,7 @@ if __name__ == '__main__':
         # extract image features using MobileNet V2
 
         if os.path.exists(FLAGS.fine_tuning):
-            extract_features_fine_tuning(FLAGS.fine_tuning, FLAGS.fine_tuned_layer, FLAGS.model_name)
+            extract_features_fine_tuning(FLAGS.fine_tuning, FLAGS.bottleneck_layer, FLAGS.model_name)
         else:
             print('you don`t have pb! cluster model:', FLAGS.model_name)
             extract_features(FLAGS.model_name)

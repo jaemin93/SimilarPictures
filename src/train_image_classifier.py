@@ -209,7 +209,7 @@ tf.app.flags.DEFINE_integer('max_number_of_steps', None,
 #####################
 # Fine-Tuning Flags #
 #####################
-tf.app.flags.DEFINE_string(
+tf.app.flags.DEFINE_boolean(
     'is_training', True,
     'is_trining option of batch normalization')
 

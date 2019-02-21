@@ -36,10 +36,10 @@ $ pip install (requirements)
 ```
 
 ## Pre-trained Models use K-means (n_cluster=153)
-Model | Hub Module | Output size | Score |
-:------:|:---------------:|:---------------------:|:-----------:|
+Model | Hub Module | Output size | Score | Fine_tune_Score
+:------:|:---------------:|:---------------------:|:-----------:|:--------------------:|
 inception_v3 | [inception_v3](https://tfhub.dev/google/imagenet/inception_v3/feature_vector/1)| 2048 | 39.4 | 
-inception_resnet_v2 |[inception_resnet_v2](https://tfhub.dev/google/imagenet/inception_resnet_v2/feature_vector/1)| 1536 | 29.1 |
+inception_resnet_v2 |[inception_resnet_v2](https://tfhub.dev/google/imagenet/inception_resnet_v2/feature_vector/1)| 1536 | 29.1 | 100
 mobilenet_v2_140_224| [mobilenet_v2_140_224](https://tfhub.dev/google/imagenet/mobilenet_v2_140_224/feature_vector/2)| 1792 | 45.9 |
 resnet_v2_152|[resnet_v2_152](https://tfhub.dev/google/imagenet/resnet_v2_152/feature_vector/1)| 2048 | 42.1 |
 
@@ -119,7 +119,7 @@ $ python download_and_convert_data.py --dataset_name=[데이터셋이름] --data
 해당 명령어는 저희의 directory path에 맞춰넣은 것이므로 path는 사용자의 path에 맞게 수정가능 합니다.
 다른 옵션의 의문점은 [tf-slim](https://github.com/tensorflow/models/tree/master/research/slim) 에서 확인 가능합니다.
 
---trainble_scopes 옵션을 주의하세요. Feature Vector가 나온이후의 layer를 재학습한다면 clustering에 Input에 해당하는 Feature Vector는 의미가 사라집니다. Feature Vecotr 이전 layer를 적절히 학습하세요. Tensorboard를 적극 활용하면 매우 쉽습니다.
+- trainble_scopes 옵션을 주의하세요. Feature Vector가 나온이후(bottleneck layer 이후)의 layer를 재학습한다면 clustering에 Input에 해당하는 Feature Vector는 의미가 사라집니다. bottleneck layer 이전 layer를 적절히 학습하세요. Tensorboard를 적극 활용하면 매우 쉽습니다. (tensorboard_graph_ex 디렉토리를 참고하세요.)
 
 ```
 $ python train_image_classifier.py 
@@ -127,6 +127,7 @@ $ python train_image_classifier.py
     --dataset_dir=/your/dataset/
     --dataset_name=[your dataset name]
     --dataset_split_name=train 
+    --is_training=[True or False]
     --max_number_of_steps=[how many do you want to train]
     --batch_size=[number of batch size]
     --model_name=[model name]
@@ -134,6 +135,11 @@ $ python train_image_classifier.py
     --checkpoint_exclude_scopes=[재학습할 Layer] 
     --trainable_scopes=[재학습할 Layer]
 ```
+- train_image_classifier.py 를 실행할 때 batch_size 를 원하는 값으로 주어도 상관없지만, 
+**학습이 끝난 후에 또다시 batch=1, is_training=False 로 옵션을 바꿔서 새로운 ckpt를 만들어 주어야 합니다.** 
+그 이유는 이후 extract_featurese_fine_tune.py를 실행 할 때 불러올 모델과 새로 넣어줄 input shape가 맞아야 하는데 현재는 위와같이 추가 작업을 해주어야 진행이 가능합니다.
+
+
 
 ## Step 4: Make pb file
 
@@ -146,7 +152,7 @@ $ python freeze_graph.py \
     --input_graph=/path/to/your/graph.pbtxt \
     --input_checkpoint=/path/to/your/.ckpt \
     --output_graph=/path/to/your/.pb \
-    --output_node_names=[재학습된 Layer]
+    --output_node_names=[output node name]
 ```
 
 # Run
@@ -156,7 +162,7 @@ $ python freeze_graph.py \
 ```
 python run_all.py \
     --fine_tuning=[pb파일 위치 파일이름까지] \
-    --fine_tuned_layer=[재학습된 layer] \
+    --bottleneck_layer=[bottleneck node name] \
     --number_of_cluster=[개수를 모른다면 -1]
 ```
 
@@ -178,6 +184,7 @@ Rand Index(DBSCAN):             0.xx
 
 좋은 점수가 나오셨길 바랍니다! 
 
+* fine tuning된 모델을 사용했을 때 예상과 다른 결과가 나온다면 pb 파일을 확인하시길 바랍니다. (<a href='#Finetuning'>step3를 참고하세요)
 
 # Chanllenge
 <a id='Chanllenge'></a>
@@ -188,7 +195,3 @@ Challenge List:
 3. ~~DBSCAN 군집화 알고리즘 사용하기(Finish 2019-02-19)~~
 4. Triplet loss(Will finish in a week.)
 
-# Trouble
-<a id='Trouble'></a>
-tf-slim에서 [ILSVRC-2012-CLS](http://www.image-net.org/challenges/LSVRC/2012/)으로 pre-trained 된 ckpt를 가져와서 하는 방식이 hub.Module(module_url)으로 url 로드하는 방식과 다르지만 같은 결과를 낼것으로 기대하였으나 실제로 오차가 매우큰 결과를 내서 tf-slim에서 ckpt를 로드하는 우리의 방식이 문제라고 인식 되었다. 
-이 방법을 해결중에 있으며 해결되면 V 1.1(update)로 찾아오겠다.
