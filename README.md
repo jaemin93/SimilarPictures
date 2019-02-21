@@ -43,11 +43,12 @@ inception_resnet_v2 |[inception_resnet_v2](https://tfhub.dev/google/imagenet/inc
 mobilenet_v2_140_224| [mobilenet_v2_140_224](https://tfhub.dev/google/imagenet/mobilenet_v2_140_224/feature_vector/2)| 1792 | 45.9 |
 resnet_v2_152|[resnet_v2_152](https://tfhub.dev/google/imagenet/resnet_v2_152/feature_vector/1)| 2048 | 42.1 |
 
+![inception_resnet_v2 t-SNE](../graph/cluster_t-SNE.png)
 
 # Clustering a model from scratch.
 <a id='Clustering'></a>
 
-어떠한 이미지 데이터셋이든 자신이 원하는 모델로 옵션을 줘서 Clustering을 진행할 수 있습니다. [모델 이름](https://github.com/jaemin93/SimilarPictures/blob/master/src/models/model_map.py)
+어떠한 이미지 데이터셋이든 자신이 원하는 모델로 ``옵션을 줘서 Clustering을 진행할 수 있습니다. [모델 이름](https://github.com/jaemin93/SimilarPictures/blob/master/src/models/model_map.py)
 
 i) cluster 개수를 알고 있을 경우
 ```
@@ -119,7 +120,7 @@ $ python download_and_convert_data.py --dataset_name=[데이터셋이름] --data
 해당 명령어는 저희의 directory path에 맞춰넣은 것이므로 path는 사용자의 path에 맞게 수정가능 합니다.
 다른 옵션의 의문점은 [tf-slim](https://github.com/tensorflow/models/tree/master/research/slim) 에서 확인 가능합니다.
 
-- trainble_scopes 옵션을 주의하세요. Feature Vector가 나온이후(bottleneck layer 이후)의 layer를 재학습한다면 clustering에 Input에 해당하는 Feature Vector는 의미가 사라집니다. bottleneck layer 이전 layer를 적절히 학습하세요. Tensorboard를 적극 활용하면 매우 쉽습니다. (tensorboard_graph_ex 디렉토리를 참고하세요.)
+- trainble_scopes 옵션을 주의하세요. Feature Vector가 나온이후(bottleneck layer 이후)의 layer를 재학습한다면 clustering에 Input에 해당하는 Feature Vector는 의미가 사라집니다. bottleneck layer 이전 layer를 적절히 학습하세요. Tensorboard를 적극 활용하면 매우 쉽습니다. (graph 디렉토리를 참고하세요.)
 
 ```
 $ python train_image_classifier.py 
