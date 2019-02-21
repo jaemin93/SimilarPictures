@@ -196,4 +196,4 @@ Challenge List:
 2. 계층적 군집화 알고리즘 사용하기
 3. ~~DBSCAN 군집화 알고리즘 사용하기(Finish 2019-02-19)~~
 4. Triplet loss(Will finish in a week.)
-
+5. 네이버 쇼핑 카테고리에 맞도록 데이터셋을 구성하여 fine tunning
