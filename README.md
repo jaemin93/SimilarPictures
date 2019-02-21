@@ -35,15 +35,15 @@ $ git clone https://github.com/jaemin93/SimilarPictures.git
 $ pip install (requirements)
 ```
 
-## Pre-trained Models use K-means (n_cluster=153)
+## Pre-trained Models use K-means (n_cluster=153, n_cluster=28)
 Model | Hub Module | Output size | Score | Fine_tune_Score
 :------:|:---------------:|:---------------------:|:-----------:|:--------------------:|
-inception_v3 | [inception_v3](https://tfhub.dev/google/imagenet/inception_v3/feature_vector/1)| 2048 | 39.4 | 
-inception_resnet_v2 |[inception_resnet_v2](https://tfhub.dev/google/imagenet/inception_resnet_v2/feature_vector/1)| 1536 | 29.1 | 100
-mobilenet_v2_140_224| [mobilenet_v2_140_224](https://tfhub.dev/google/imagenet/mobilenet_v2_140_224/feature_vector/2)| 1792 | 45.9 |
-resnet_v2_152|[resnet_v2_152](https://tfhub.dev/google/imagenet/resnet_v2_152/feature_vector/1)| 2048 | 42.1 |
+inception_v3 | [inception_v3](https://tfhub.dev/google/imagenet/inception_v3/feature_vector/1)| 2048 | 39.4(153) | 
+inception_resnet_v2 |[inception_resnet_v2](https://tfhub.dev/google/imagenet/inception_resnet_v2/feature_vector/1)| 1536 | 29.1(153) | 100(28)
+mobilenet_v2_140_224| [mobilenet_v2_140_224](https://tfhub.dev/google/imagenet/mobilenet_v2_140_224/feature_vector/2)| 1792 | 45.9(153) |
+resnet_v2_152|[resnet_v2_152](https://tfhub.dev/google/imagenet/resnet_v2_152/feature_vector/1)| 2048 | 42.1(153) |
 
-![inception_resnet_v2 t-SNE](https://github.com/jaemin93/SimilarPictures/blob/master/graph/cluster_t-SNE_.png)
+![inception_resnet_v2 t-SNE](https://github.com/jaemin93/SimilarPictures/blob/master/graph/cluster_t-SNE_.png){: width="65%" height="65%"}
 
 # Clustering a model from scratch.
 <a id='Clustering'></a>
