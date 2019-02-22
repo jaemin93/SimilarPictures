@@ -12,7 +12,7 @@ from config import *
 import tensorflow as tf
 
 tf.app.flags.DEFINE_string(
-    'model_name', 'mobilenet_v1_050_224', 'The name of the architecture to train.')
+    'model_name', 'inception_resnet_v2', 'The name of the architecture to train.')
 tf.app.flags.DEFINE_integer(
     'number_of_cluster', -1, 'True number of clustering')
 tf.app.flags.DEFINE_string(

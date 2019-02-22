@@ -166,11 +166,12 @@ $ python freeze_graph.py \
 
 ```
 python run_all.py \
+    --model_name=[사용한 모델의 이름]\
     --fine_tuning=[pb파일 위치 파일이름까지] \
     --bottleneck_layer=[bottleneck node name] \
     --number_of_cluster=[개수를 모른다면 -1]
 ```
-
+*defalt model은 inception_resnet_v2 입니다.
 
 
 # Evalution

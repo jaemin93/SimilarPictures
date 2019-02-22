@@ -29,7 +29,8 @@ def add_jpeg_decoding():
   decoded_image_as_float = tf.image.convert_image_dtype(decoded_image,
                                                         tf.float32)
   decoded_image_4d = tf.expand_dims(decoded_image_as_float, 0)
-  resize_shape = tf.stack([224, 224]) #input_height, input_width
+  # Todo (check your model's input image shape) ======================================================================================
+  resize_shape = tf.stack([299, 299]) #input_height, input_width
   resize_shape_as_int = tf.cast(resize_shape, dtype=tf.int32)
   resized_image = tf.image.resize_bilinear(decoded_image_4d,
                                            resize_shape_as_int)
