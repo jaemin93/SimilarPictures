@@ -87,6 +87,10 @@ https://github.com/tensorflow/models/tree/master/research/slim <- 링크에서 I
 
 저희는 [Inception_resent_v2](http://download.tensorflow.org/models/inception_resnet_v2_2016_08_30.tar.gz)로 진행하였고 이것에 대한 Tutorial은 아래와 같습니다.
 
+- naver shopping dataset 으로 fine tuning을 진행한 inception_resnet_v2.pb file은 아래 링크를 참고해주세요. 바로 클러스터링을 진행하시면 됩니다.
+https://drive.google.com/drive/folders/182q47QzousZBJ1xMShgow7WGIoTdUkW0?usp=sharing
+
+
 ## Step 1: Augmentation
 
 데이터 개수가 충분하지 않다면 적절한 Augmentatino을 통해 데이터개수를 불려주시길 바랍니다.
