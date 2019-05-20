@@ -196,10 +196,5 @@ Rand Index(DBSCAN):             0.xx
 
 # Chanllenge
 <a id='Chanllenge'></a>
-Challenge List:
 
-1. DELF 모델로 효율적인 Clustering 방법
-2. 계층적 군집화 알고리즘 사용하기
-3. ~~DBSCAN 군집화 알고리즘 사용하기(Finish 2019-02-19)~~
-4. Triplet loss(Will finish in a week.)
-5. 네이버 쇼핑 카테고리에 맞도록 데이터셋을 구성하여 fine tunning
+1. Triplet (https://github.com/jaemin93/Clustering_using_triplet_loss)
